@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Prior Art Search </title>
+</head>
+
+<body>
+    <h1> Patent Prior Art Search </h1>
+    <p> Enter a description of your patent and we will pull up any prior art related to it.</p>
+    <form action="/search" method="POST">
+        <label for="invention_description"> Your invention description: </label><br>
+        <textarea id="invention_description" name="invention_description" style="height: 500px; width: 800px;"
+            required></textarea><br>
+        <input type="submit" value="Search">
+    </form>
+</body>
+
+</html>

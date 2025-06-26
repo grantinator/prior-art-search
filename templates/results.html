@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Prior Art Search Results</title>
+</head>
+
+<body>
+    <h1> Patent Prior Art Search Results</h1><br>
+    <h2> Your invention </h2>
+    <p> {{invention_description}} </p>
+    <h2> Potentional Prior Art</h2>
+    {% if results %}
+    {% for result in results %}
+    <div>
+        <a href="{{ result.unified_patents_link }}">
+            <h3><strong>Title: </strong>{{ result.title }}</h3>
+        </a>
+        <p><strong>Abstract: </strong><br>{{ result.abstract }}</p>
+        <p><strong> Similarity:</strong>{{result.similarity}}</p>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>No prior art found for your invention description.</p>
+    {% endif %}
+    <a href=" /">Search Again</a>
+</body>
+
+</html>
