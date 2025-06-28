@@ -3,13 +3,18 @@ from sentence_transformers import SentenceTransformer, util
 import numpy as np
 import torch.nn.functional as F
 from keybert import KeyBERT
+from flask_cors import CORS
 import torch
 import pickle
 import os
 import json
+import logging
 
 app = Flask(__name__)
+CORS(app, origins="*")
 TOP_K = 3
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 model = SentenceTransformer("all-mpnet-base-v2")
 kw_model = KeyBERT(model=model)
@@ -27,15 +32,20 @@ for filename in os.listdir("patent_data"):
         except Exception as e:
             print(f"An error occurred while processing {filename}: {e}")
 
-
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return "Hello from Flask Index!"
 
 
 @app.route("/search", methods=["POST"])
 def search():
-    user_invention_description = request.form["invention_description"]
+    data = request.get_json()
+    if data is None:
+        # Handle cases where the request body is not valid JSON
+        print("Received request but no valid JSON data.")
+        return jsonify({"error": "Invalid JSON or no data provided"}), 400
+    
+    user_invention_description = data.get("invention_description")
 
     if not user_invention_description:
         return jsonify({"error": "Invention description is required"}), 400
@@ -122,12 +132,14 @@ def search():
         return jsonify({"error": "No similar prior art found"}), 404
 
     top_k_results = results_sorted[:TOP_K]
-    return render_template(
-        "results.html",
-        invention_description=user_invention_description,
-        results=top_k_results,
+    return jsonify(
+        {
+            "invention_description": user_invention_description,
+            "results": top_k_results,
+            "status": "success"
+        }
     )
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=8000)

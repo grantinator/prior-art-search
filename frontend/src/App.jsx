@@ -9,31 +9,55 @@ function App() {
   const [view, setView] = useState("home");
   const [inventionDescription, setInventionDescription] = useState("");
   const [results, setResults] = useState([]);
+  const [error, setError] = useState("");
 
   const handleSearchSubmit = async (invention_description) => {
     setInventionDescription(invention_description);
 
-    const response = await fetch("/search", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({invention_description: invention_description})
-    });
-
-    if (!response.ok) {
-      console.error("Error fetching search results:", response.statusText);
-      return;
+    try {
+      const response = await fetch("/search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({invention_description: invention_description})
+      });
+      if (!response.ok) {
+        if (response.status === 404) {
+          setError("No similar patents found for your invention description.");
+          setView("error");
+        } else {
+          console.error("Error fetching search results:", response.statusText);
+          setError("Something went wrong. Please try again.");
+          setView("error");
+        }
+        return
+      }
+      const data = await response.json();
+      setResults(data.results);
+      setView("searchResults");
+    } catch (err) {
+      setError("Failed to fetch search results. Please try again.");
+      setView("error");
     }
-    const data = await response.json();
-    setResults(data.results);
-    setView("searchResults");
   }
   return (
-    view === "home" ? 
-      <Home onSubmit={handleSearchSubmit} /> :
+    <>
+    {view == "home" && (
+      <Home onSubmit={handleSearchSubmit} /> 
+    )}
+    {view === "searchResults" && (
       <SearchResults 
         inventionDescription={inventionDescription} 
         results={results} 
       />
+    )}
+    {view === "error" && (
+      <div>
+        <h1>Error</h1>
+        <p>{error}</p>
+        <button onClick={() => setView("home")}>Go Back</button>
+      </div>
+    )}
+    </>
   );
 }
 
