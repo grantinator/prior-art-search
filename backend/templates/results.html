@@ -3,13 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Prior Art Search Results</title>
 </head>
 
 <body>
     <h1> Patent Prior Art Search Results</h1><br>
-    <h2> Your invention </h2>
+    <h2> Your invention: </h2>
     <p> {{invention_description}} </p>
     <h2> Potentional Prior Art</h2>
     {% if results %}

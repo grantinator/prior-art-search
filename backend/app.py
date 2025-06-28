@@ -123,7 +123,9 @@ def search():
 
     top_k_results = results_sorted[:TOP_K]
     return render_template(
-        "results.html", invention=user_invention_description, results=top_k_results
+        "results.html",
+        invention_description=user_invention_description,
+        results=top_k_results,
     )
 
 

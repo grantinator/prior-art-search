@@ -80,6 +80,5 @@ textarea {
     box-sizing: border-box;
     margin-top: 8px;
     margin-bottom: 8px;
-    border-radius: 25% 10%;
     border: 5px solid rgb(29, 32, 46);
 }
