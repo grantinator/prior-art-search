@@ -2,20 +2,34 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Prior Art Search </title>
 </head>
 
 <body>
-    <h1> Patent Prior Art Search </h1>
-    <p> Enter a description of your patent and we will pull up any prior art related to it.</p>
-    <form action="/search" method="POST">
-        <label for="invention_description"> Your invention description: </label><br>
-        <textarea id="invention_description" name="invention_description" style="height: 500px; width: 800px;"
-            required></textarea><br>
-        <input type="submit" value="Search">
-    </form>
+    <header>
+        <div class="logo">
+            <h1> Patent.<span opacity="50">ly</span> </h1>
+        </div>
+        <div class="nav">
+            <button> Demo </button>
+            <button> About </button>
+            <button> Contact </button>
+        </div>
+    </header>
+    <div class="primary-content">
+        <div class="title">
+            <h1> Find Prior Art in Seconds</h1>
+        </div>
+        <p> AI powered search to find patents related to your ideas. </p>
+        <form action="/search" method="POST">
+            <label for="invention_description"> Your invention description: </label><br>
+            <textarea id="invention_description" name="invention_description" required></textarea><br>
+            <input type="submit" value="Search">
+        </form>
+    </div>
 </body>
 
 </html>

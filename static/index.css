@@ -1,0 +1,85 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(49, 52, 78);
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-inline: 0.25em;
+    margin-top: 0.25em;
+    margin-inline: auto;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+header .logo {
+    font-weight: bold;
+    font-size: 1.25em;
+}
+
+header .nav {
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+}
+
+header .nav button {
+    border-radius: 3px;
+    border: 2px solid rgb(29, 32, 46);
+    background-color: rgb(54, 55, 61);
+    /* height: 50%; */
+    padding: 0.25em 0.75em;
+    font-size: 1.15em;
+}
+
+header span {
+    opacity: 50;
+    filter: blur(1px);
+}
+
+.primary-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60vw;
+    max-width: 880px;
+    margin: 0;
+    height: 80vh;
+    padding: 20px;
+    margin: 20px auto;
+    box-sizing: border-box;
+}
+
+.primary-content form {
+    width: 100%;
+    height: 45vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.primary-content h1 {
+    font-size: 3.5em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+textarea {
+    flex-grow: 1;
+    width: 100%;
+    height: 40%;
+    resize: none;
+    box-sizing: border-box;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    border-radius: 25% 10%;
+    border: 5px solid rgb(29, 32, 46);
+}
